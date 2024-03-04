@@ -1,5 +1,9 @@
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { setPage } from "../redux/features/user/slice";
+import {
+  setPage,
+  deleteSelectedUsers,
+  deleteUser,
+} from "../redux/features/user/slice";
 
 const Pagination = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +17,14 @@ const Pagination = () => {
 
   return (
     <div>
-      <nav aria-label="Page navigation example">
+      <div aria-label="Page navigation" className="mx-auto">
+        <button
+          type="button"
+          onClick={() => dispatch(deleteSelectedUsers())}
+          className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+        >
+          Delete Selected
+        </button>
         <ul className="inline-flex -space-x-px text-base h-10">
           <li>
             <button
@@ -62,7 +73,7 @@ const Pagination = () => {
             </button>
           </li>
         </ul>
-      </nav>
+      </div>
     </div>
   );
 };

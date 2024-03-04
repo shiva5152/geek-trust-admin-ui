@@ -10,7 +10,8 @@ type TJobPstState = {
     totalNumOfPage: number,
     totalUsers: number,
     filter: string,
-    filteredUsers: TUser[]
+    filteredUsers: TUser[],
+    selectedUsers: TUser[],
 }
 
 type TForGetAllUsers = {
@@ -27,7 +28,8 @@ const initialState: TJobPstState = {
     totalNumOfPage: 1,
     totalUsers: 0,
     filter: '',
-    filteredUsers: []
+    filteredUsers: [],
+    selectedUsers: [],
 }
 
 export const userDataSlice = createSlice({
@@ -56,11 +58,46 @@ export const userDataSlice = createSlice({
             state.filteredUsers = action.payload.users;
             state.totalNumOfPage = action.payload.totalNumOfPage;
             state.totalUsers = action.payload.totalUsers;
-        }
-
+        },
+        selectUser: (state, action: PayloadAction<TUser>) => {
+            state.selectedUsers.push(action.payload);
+        },
+        selectAllUsers: (state, action: PayloadAction<TUser[]>) => {
+            state.selectedUsers = action.payload;
+        },
+        unSelectUser: (state, action: PayloadAction<TUser>) => {
+            state.selectedUsers = state.selectedUsers.filter(
+                (user) => user.id !== action.payload.id
+            );
+        },
+        unSelectAllUsers: (state) => {
+            state.selectedUsers = [];
+        },
+        deleteSelectedUsers: (state) => {
+            state.users = state.users.filter(
+                (user) => !state.selectedUsers.find((selectedUser) => selectedUser.id === user.id)
+            );
+            state.selectedUsers = [];
+        },
+        deleteUser: (state, action: PayloadAction<string>) => {
+            state.users = state.users.filter((user) => user.id !== action.payload);
+        },
     },
 })
 
-export const { getUsersStart, getUsersFail, getUsersSuccess, setUsersByFilter, setFilter, setPage } = userDataSlice.actions
+export const {
+    getUsersStart,
+    getUsersFail,
+    getUsersSuccess,
+    setUsersByFilter,
+    setFilter,
+    setPage,
+    selectUser,
+    selectAllUsers,
+    unSelectUser,
+    unSelectAllUsers,
+    deleteSelectedUsers,
+    deleteUser,
+} = userDataSlice.actions
 
 export default userDataSlice.reducer

@@ -1,9 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import {
+  selectAllUsers,
+  selectUser,
+  unSelectUser,
+  unSelectAllUsers,
+  deleteUser,
+} from "../redux/features/user/slice";
+import type { TUser } from "../types/user";
+import EditForm from "./EditForm";
 
 const Table = () => {
   const dispatch = useAppDispatch();
-  const { filteredUsers } = useAppSelector((state) => state.users);
+  const { filteredUsers, selectedUsers } = useAppSelector(
+    (state) => state.users
+  );
+  const handleSelectAll = () => {
+    dispatch(selectAllUsers(filteredUsers));
+  };
+  const handleSelect = (user: TUser) => {
+    dispatch(selectUser(user));
+  };
+  const handleUnSelect = (user: TUser) => {
+    dispatch(unSelectUser(user));
+  };
+  const handleUnSelectAll = () => {
+    dispatch(unSelectAllUsers());
+  };
+
+  const [editableUser, setEdidtableUser] = useState<TUser | null>(null);
+  const [isOpened, setIsOpened] = useState(false);
+
+  const handleEdit = (user: TUser) => {
+    setEdidtableUser(user);
+    setIsOpened(true);
+  };
   return (
     <div>
       <div className="relative overflow-x-auto">
@@ -14,7 +45,15 @@ const Table = () => {
                 <input
                   id="col-checkbox"
                   type="checkbox"
-                  value=""
+                  value="all"
+                  checked={filteredUsers.length === selectedUsers.length}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      handleSelectAll();
+                    } else {
+                      handleUnSelectAll();
+                    }
+                  }}
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                 />
               </th>
@@ -46,7 +85,15 @@ const Table = () => {
                   <input
                     id="row-checkbox"
                     type="checkbox"
-                    value=""
+                    value={user.id.toString()}
+                    checked={selectedUsers.some((u) => u.id === user.id)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        handleSelect(user);
+                      } else {
+                        handleUnSelect(user);
+                      }
+                    }}
                     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                 </th>
@@ -57,7 +104,10 @@ const Table = () => {
                 <td className="px-6 py-2">{user.email}</td>
                 <td className="px-6 py-2">{user.role}</td>
                 <td className="px-6 py-2">
-                  <button className="text-blue-600 hover:underline me-2">
+                  <button
+                    onClick={() => handleEdit(user)}
+                    className="text-blue-600 hover:underline me-2"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -73,7 +123,10 @@ const Table = () => {
                       />
                     </svg>
                   </button>
-                  <button className="text-red-600 hover:underline">
+                  <button
+                    onClick={() => dispatch(deleteUser(user.id))}
+                    className="text-red-600 hover:underline"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -95,6 +148,7 @@ const Table = () => {
           </tbody>
         </table>
       </div>
+      {isOpened && editableUser ? <EditForm user={editableUser} /> : null}
     </div>
   );
 };
