@@ -1,15 +1,9 @@
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import {
-  setPage,
-  deleteSelectedUsers,
-  deleteUser,
-} from "../redux/features/user/slice";
+import { setPage, deleteSelectedUsers } from "../redux/features/user/slice";
 
 const Pagination = () => {
   const dispatch = useAppDispatch();
-  const { users, filter, page, totalNumOfPage, totalUsers } = useAppSelector(
-    (state) => state.users
-  );
+  const { page, totalNumOfPage } = useAppSelector((state) => state.users);
   const handlePageChange = (page: number) => {
     console.log("page", page);
     dispatch(setPage(page));
@@ -49,8 +43,8 @@ const Pagination = () => {
               <button
                 onClick={() => handlePageChange(p)}
                 className={`${
-                  page === p ? "bg-gray-300" : ""
-                } flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+                  page === p ? "bg-gray-300" : "bg-white"
+                } flex items-center justify-center px-4 h-10 leading-tight text-gray-500  border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
               >
                 {p}
               </button>

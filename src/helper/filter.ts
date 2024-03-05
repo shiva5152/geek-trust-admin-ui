@@ -1,6 +1,6 @@
 import type { TUser } from "../types/user"
 import type { AppDispatch } from "../redux/store";
-import { setUsersByFilter } from "../redux/features/user/slice";
+import { setUsersByFilter, setPage } from "../redux/features/user/slice";
 
 export const filterUsers = (users: TUser[], filter: string, page: number, dispatch: AppDispatch) => {
 
@@ -17,4 +17,7 @@ export const filterUsers = (users: TUser[], filter: string, page: number, dispat
 
     const totalNumOfPage = Math.ceil(filteredUsers.length / usersPerPage);
     dispatch(setUsersByFilter({ users: filteredUsers.length > 10 ? filteredUsers.slice((page - 1) * usersPerPage, page * usersPerPage) : filteredUsers, totalNumOfPage, totalUsers: filteredUsers.length }));
+    if (page > totalNumOfPage) {
+        dispatch(setPage(totalNumOfPage));
+    }
 }
