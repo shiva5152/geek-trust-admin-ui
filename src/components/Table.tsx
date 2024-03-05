@@ -106,7 +106,7 @@ const Table = () => {
                 <td className="px-6 py-2">
                   <button
                     onClick={() => handleEdit(user)}
-                    className="text-blue-600 hover:underline me-2"
+                    className="edit text-blue-600 hover:underline me-2"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -125,7 +125,7 @@ const Table = () => {
                   </button>
                   <button
                     onClick={() => dispatch(deleteUser(user.id))}
-                    className="text-red-600 hover:underline"
+                    className="delete text-red-600 hover:underline"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

@@ -24,7 +24,7 @@ const Pagination = () => {
             <button
               disabled={page === 1}
               onClick={() => handlePageChange(1)}
-              className="flex items-center justify-center px-4 h-10 me-2 leading-tight text-gray-500 bg-white border rounded-e-lg border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              className="first-page flex items-center justify-center px-4 h-10 me-2 leading-tight text-gray-500 bg-white border rounded-e-lg border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               First
             </button>
@@ -33,7 +33,7 @@ const Pagination = () => {
             <button
               disabled={page === 1}
               onClick={() => handlePageChange(page - 1)}
-              className="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              className="previous-page flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               Prev
             </button>
@@ -44,7 +44,7 @@ const Pagination = () => {
                 onClick={() => handlePageChange(p)}
                 className={`${
                   page === p ? "bg-gray-300" : "bg-white"
-                } flex items-center justify-center px-4 h-10 leading-tight text-gray-500  border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
+                } page flex items-center justify-center px-4 h-10 leading-tight text-gray-500  border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
               >
                 {p}
               </button>
@@ -54,7 +54,7 @@ const Pagination = () => {
             <button
               disabled={page === totalNumOfPage}
               onClick={() => handlePageChange(page + 1)}
-              className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              className="next-page flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               Next
             </button>
@@ -63,7 +63,7 @@ const Pagination = () => {
             <button
               disabled={page === totalNumOfPage}
               onClick={() => handlePageChange(totalNumOfPage)}
-              className="flex items-center justify-center ms-2 px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              className="last-page flex items-center justify-center ms-2 px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
             >
               Last
             </button>
