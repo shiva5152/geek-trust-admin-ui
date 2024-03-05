@@ -16,7 +16,7 @@ const Pagination = () => {
   };
 
   return (
-    <div>
+    <div className="mx-auto mt-16">
       <div aria-label="Page navigation" className="mx-auto">
         <button
           type="button"
@@ -48,7 +48,9 @@ const Pagination = () => {
             <li key={p}>
               <button
                 onClick={() => handlePageChange(p)}
-                className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                className={`${
+                  page === p ? "bg-gray-300" : ""
+                } flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}
               >
                 {p}
               </button>

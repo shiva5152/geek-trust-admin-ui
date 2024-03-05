@@ -28,16 +28,16 @@ const Table = () => {
     dispatch(unSelectAllUsers());
   };
 
-  const [editableUser, setEdidtableUser] = useState<TUser | null>(null);
+  const [editableUser, setEditableUser] = useState<TUser | null>(null);
   const [isOpened, setIsOpened] = useState(false);
 
   const handleEdit = (user: TUser) => {
-    setEdidtableUser(user);
+    setEditableUser(user);
     setIsOpened(true);
   };
   return (
     <div>
-      <div className="relative overflow-x-auto">
+      <div className="relative min-h-[75vh] overflow-x-auto">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -148,7 +148,9 @@ const Table = () => {
           </tbody>
         </table>
       </div>
-      {isOpened && editableUser ? <EditForm user={editableUser} /> : null}
+      {isOpened && editableUser ? (
+        <EditForm user={editableUser} setIsOpened={setIsOpened} />
+      ) : null}
     </div>
   );
 };
